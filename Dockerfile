@@ -69,9 +69,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
 # Add appropriate permissions to env-inject
-COPY env-inject.js.sh start.sh ./
-RUN chown nextjs:nodejs /app/env-inject.js.sh /app/start.sh
-RUN chmod 500 /app/env-inject.js.sh /app/start.sh
+COPY --chown=nextjs:nodejs deploy/env-inject.js.sh deploy/start.sh ./deploy/
+RUN chmod 500 /app/deploy/env-inject.js.sh /app/deploy/start.sh
+
+# Create folder where to put env-inject generated javascript
 RUN (mkdir /app/public/env-inject || :)
 RUN chown -R nextjs:nodejs /app/public/env-inject
 
@@ -86,7 +87,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["sh", "-c", "/app/start.sh"]
+CMD ["sh", "-c", "/app/deploy/start.sh"]
 
 # Build and test locally with:
 # docker build -t justaquicktest .
