@@ -10,12 +10,17 @@ RUN yarn install --frozen-lockfile
 # COPY package.json package-lock.json ./
 # RUN npm ci
 
+####################################################################################################
+
 # Rebuild the source code only when needed
 FROM node:17.6.0-alpine AS builder
+ENV NODE_ENV production
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY ./public ./public
+COPY ./src ./src
+COPY .eslintrc.json next-env.d.ts next.config.js package.json tsconfig.json yarn.lock ./
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -28,8 +33,11 @@ RUN yarn build
 # If using npm comment out above and use below instead
 # RUN npm run build
 
+####################################################################################################
+
 # Production image, copy all the files and run next
 FROM node:17.6.0-alpine AS runner
+ENV NODE_ENV production
 LABEL org.opencontainers.image.source="https://github.com/cienfuegos-dev/simplest-app-next-js"
 
 # Version arguments/variables
@@ -49,7 +57,6 @@ ENV APP_HOSTNAME=${APP_HOSTNAME}
 
 WORKDIR /app
 
-ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -62,7 +69,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
 # Add appropriate permissions to env-inject
-COPY --from=builder /app/env-inject.js.sh /app/start.sh ./
+COPY env-inject.js.sh start.sh ./
 RUN chown nextjs:nodejs /app/env-inject.js.sh /app/start.sh
 RUN chmod 500 /app/env-inject.js.sh /app/start.sh
 RUN (mkdir /app/public/env-inject || :)
