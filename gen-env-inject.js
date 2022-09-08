@@ -9,7 +9,8 @@ const envVarsRegex = /"\${(?<envar>[a-zA-Z_0-9]+)\??\}"/g;
 const dynamicEnvVarRegex = name => new RegExp(`"\\\${(${name})\\??\\}"`, 'gi');
 
 const getReplacedEnvInject = () => {
-  const envInjectTemplatePath = path.join(__dirname, 'env-inject.js.sh');
+  const envInjectTemplatePath = path.join(__dirname, 'deploy', 'env-inject.js.sh');
+  console.log("Will try");
   const envInjectTemplate = fs.readFileSync(envInjectTemplatePath).toString().match(payloadRegex)?.groups?.payload || '';
   const envVarMatches = envInjectTemplate.matchAll(envVarsRegex);
 
