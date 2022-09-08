@@ -3,5 +3,5 @@
   && /app/env-inject.js.sh > /app/public/env-inject/env-inject.js \
   && echo File env-inject.js generated. \
   && chmod 400 /app/public/env-inject/env-inject.js \
-  && APP_HOSTNAME=$(hostname -f)
+  && APP_HOSTNAME=$(hostname -f) \
   && node server.js
