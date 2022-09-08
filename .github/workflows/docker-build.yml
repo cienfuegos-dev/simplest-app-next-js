@@ -1,0 +1,36 @@
+# Build and publish docker images
+#
+# Secrets:
+#    - DOCKER_USER: Your GitHub or Docker username. Used to push the image to GihHub or Docker.
+#    - DOCKER_TOKEN: Used to push the image to GitHub or Docker. Generated at https://github.com/settings/tokens with write:packages scope.
+#    - GOOGLE_REGISTRY_SERVICE_ACCOUNT_KEY_BASE64: Service account key used to push the image to Google Artifact Registry.
+name: 🐳 Build
+on:
+  release:
+    types: [created]
+jobs:
+  build-and-push:
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - id: the-build
+        uses: codehacks-io/docker-build-action@v0.0.1 # You can also use the main branch
+        with:
+          dockerfile: ${{ github.workspace }}/Dockerfile
+          dockercontext: ${{ github.workspace }}
+          docker-registry-host: ghcr.io
+          docker-namespace: cienfuegos-dev
+          docker-image: simplest-app
+          docker-user: ${{ secrets.DOCKER_USER }}
+          docker-token: ${{ secrets.DOCKER_TOKEN }}
+          google-registry-host: us-west2-docker.pkg.dev
+          google-registry-project-id: rexdas
+          google-registry-repository: cienfuegos-dev-docker
+          google-registry-image: simplest-app
+          google-registry-service-account-key-base64: ${{ secrets.GOOGLE_REGISTRY_SERVICE_ACCOUNT_KEY_BASE64 }}
+      - run: echo Built with tags '${{ steps.the-build.outputs.version }}', '${{ steps.the-build.outputs.version-sha }}' and '${{ steps.the-build.outputs.version-sha-build }}'.
+        shell: bash

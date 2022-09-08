@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { BUILD, VERSION } from '../src/config'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -17,8 +18,9 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Version:{' '}
-          <code className={styles.code}>local</code>
+          Version:{' '}<code className={styles.code}>{VERSION}</code>
+          <br />
+          Build:{' '}<code className={styles.code}>{BUILD}</code>
         </p>
       </main>
     </div>
