@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { BUILD, VERSION } from '../config'
+import { VERSION } from '../config'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -19,9 +19,15 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>
           Version:{' '}<code className={styles.code}>{VERSION}</code>
-          <br />
-          Build:{' '}<code className={styles.code}>{BUILD}</code>
         </p>
+
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <code style={{ whiteSpace: 'pre-wrap' }}>
+              {JSON.stringify((window as any).envInject, null, 2)}
+            </code>
+          </div>
+        </div>
       </main>
     </div>
   )
