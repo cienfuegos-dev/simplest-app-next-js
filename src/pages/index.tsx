@@ -2,6 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { VERSION } from '../config'
 import styles from '../styles/Home.module.css'
+import dynamic from 'next/dynamic'
+
+const EnvCard = dynamic(
+  () => import('../components/EnvCard').then(({ EnvCard }) => EnvCard),
+  {
+    ssr: false,
+    loading: () => <div>getting env...</div>,
+  }
+);
 
 const Home: NextPage = () => {
   return (
@@ -23,9 +32,7 @@ const Home: NextPage = () => {
 
         <div className={styles.grid}>
           <div className={styles.card}>
-            <code style={{ whiteSpace: 'pre-wrap' }}>
-              {JSON.stringify((window as any).envInject, null, 2)}
-            </code>
+            <EnvCard />
           </div>
         </div>
       </main>
