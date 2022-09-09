@@ -20,7 +20,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY ./public ./public
 COPY ./src ./src
-COPY .eslintrc.json next-env.d.ts next.config.js package.json tsconfig.json yarn.lock ./
+COPY .eslintrc.json next.config.js package.json tsconfig.json yarn.lock ./
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
