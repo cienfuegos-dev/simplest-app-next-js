@@ -28,8 +28,8 @@ jobs:
           docker-user: ${{ secrets.DOCKER_USER }}
           docker-token: ${{ secrets.DOCKER_TOKEN }}
           google-registry-host: us-west2-docker.pkg.dev
-          google-registry-project-id: rexdas
-          google-registry-repository: cienfuegos-dev-docker
+          google-registry-project-id: devopsexperiments
+          google-registry-repository: dev-ops-experiments
           google-registry-image: simplest-app-next-js
           google-registry-service-account-key-base64: ${{ secrets.GOOGLE_REGISTRY_SERVICE_ACCOUNT_KEY_BASE64 }}
       - run: echo Built with tags '${{ steps.the-build.outputs.version }}', '${{ steps.the-build.outputs.version-sha }}' and '${{ steps.the-build.outputs.version-sha-build }}'.
