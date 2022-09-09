@@ -91,4 +91,4 @@ CMD ["sh", "-c", "/app/deploy/start.sh"]
 
 # Build and test locally with:
 # docker build -t justaquicktest .
-# docker run --rm -it -p 3001:3000 justaquicktest
+# docker run --rm -it -p 3000:3000 justaquicktest
