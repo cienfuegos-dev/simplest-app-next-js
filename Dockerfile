@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM node:17.6.0-alpine AS deps
+FROM node:18-alpine3.16 AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN yarn install --frozen-lockfile
 ####################################################################################################
 
 # Rebuild the source code only when needed
-FROM node:17.6.0-alpine AS builder
+FROM node:18-alpine3.16 AS builder
 ENV NODE_ENV production
 
 WORKDIR /app
@@ -36,7 +36,7 @@ RUN yarn build
 ####################################################################################################
 
 # Production image, copy all the files and run next
-FROM node:17.6.0-alpine AS runner
+FROM node:18-alpine3.16 AS runner
 ENV NODE_ENV production
 LABEL org.opencontainers.image.source="https://github.com/cienfuegos-dev/simplest-app-next-js"
 
