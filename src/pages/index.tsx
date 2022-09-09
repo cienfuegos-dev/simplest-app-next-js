@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { VERSION } from '../config'
 import styles from '../styles/Home.module.css'
@@ -11,6 +11,10 @@ const EnvCard = dynamic(
     loading: () => <div>getting env...</div>,
   }
 );
+
+// The run-time-injected variables won't work on pre-backed pages because of the 'Automatic Static Optimization' (see https://nextjs.org/docs/advanced-features/automatic-static-optimization).
+// In order to disable that behavior and be able to consume and render run-time-injected vars, we need to disable Automatic Static Optimization just by exporting the function getServerSideProps.
+export const getServerSideProps: GetServerSideProps = async () => ({ props: {} });
 
 const Home: NextPage = () => {
   return (
