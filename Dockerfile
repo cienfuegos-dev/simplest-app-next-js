@@ -42,10 +42,12 @@ LABEL org.opencontainers.image.source="https://github.com/cienfuegos-dev/simples
 
 # Version arguments/variables
 ARG VERSION=docker-local
+ARG VERSION_SHA=docker-local
 ARG VERSION_SHA_BUILD=docker-local
 
 # Env vars
 ENV VERSION_INFO__VERSION=${VERSION}
+ENV VERSION_INFO__VERSION_SHA=${VERSION_SHA}
 ENV VERSION_INFO__BUILD=${VERSION_SHA_BUILD}
 ENV FIREBASE_API_KEY=${FIREBASE_API_KEY}
 ENV FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}
