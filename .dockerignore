@@ -7,7 +7,6 @@ build
 coverage
 dist
 node_modules
-.dockerignore
 .env
 .env.local
 **/env-inject.js
