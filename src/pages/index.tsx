@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Simplest <a href="#">App</a>
+          Simplest <span>App</span>
         </h1>
 
         <p className={styles.description}>
