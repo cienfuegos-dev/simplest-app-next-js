@@ -31,16 +31,13 @@ const getEnv = (key: string, $default = "") => {
   }
 };
 
-export const VERSION = getEnv("VERSION_INFO__VERSION", "local");
-export const BUILD = getEnv("VERSION_INFO__BUILD", "local");
+export const APP_VERSION = getEnv("APP_VERSION", "local");
+export const APP_VERSION_SHA = getEnv("APP_VERSION_SHA", "local");
+export const APP_VERSION_BUILD = getEnv("APP_VERSION_BUILD", "local");
 export const APP_HOSTNAME = getEnv("APP_HOSTNAME", "local");
 
 export const firebaseConfig = {
   apiKey: getEnv('FIREBASE_API_KEY'),
-  authDomain: getEnv('FIREBASE_AUTH_DOMAIN'),
-  projectId: getEnv('FIREBASE_PROJECT_ID'),
-  appId: getEnv('FIREBASE_APPID'),
-  measurementId: getEnv('FIREBASE_MEASUREMENT_ID'),
 };
 
 export const exampleApiConfig = {
