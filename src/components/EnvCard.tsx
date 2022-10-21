@@ -1,5 +1,9 @@
+import {exampleApiConfig, firebaseConfig} from "../env";
+
 export const EnvCard = () => (
-    <code style={{ whiteSpace: 'pre-wrap' }}>
-        {JSON.stringify((window as any).envInject, null, 2)}
-    </code>
+    <div>
+        <code>API key: {firebaseConfig.apiKey}</code>
+        <br/>
+        <code>API url: {exampleApiConfig.apiUrl}</code>
+    </div>
 );
