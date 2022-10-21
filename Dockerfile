@@ -66,11 +66,11 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --chown=nextjs:nodejs deploy/env-inject.js.sh deploy/start.sh ./deploy/
+
 # Add appropriate permissions to env-inject
 RUN chmod 500 /app/deploy/env-inject.js.sh /app/deploy/start.sh
 
