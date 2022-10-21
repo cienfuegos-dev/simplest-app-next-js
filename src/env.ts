@@ -37,9 +37,9 @@ export const APP_VERSION_BUILD = getEnv("APP_VERSION_BUILD", "local");
 export const APP_HOSTNAME = getEnv("APP_HOSTNAME", "local");
 
 export const firebaseConfig = {
-  apiKey: getEnv('FIREBASE_API_KEY'),
+  apiKey: getEnv('APP_FIREBASE_API_KEY'),
 };
 
 export const exampleApiConfig = {
-  apiUrl: getEnv('EXAMPLE_API'),
+  apiUrl: getEnv('APP_EXAMPLE_API'),
 };
