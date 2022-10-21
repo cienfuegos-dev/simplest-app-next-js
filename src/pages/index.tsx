@@ -1,6 +1,6 @@
 import type {GetServerSideProps, NextPage} from 'next'
 import Head from 'next/head'
-import {APP_HOSTNAME, APP_VERSION_SHA} from '../env'
+import {APP_ENV, APP_HOSTNAME, APP_VERSION_SHA} from '../env'
 import styles from '../styles/Home.module.css'
 import {EnvCard} from '../components/EnvCard'
 
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Version:{' '}<code className={styles.code}>{APP_VERSION_SHA}</code>
+          Version:{' '}<code className={styles.code}>{APP_VERSION_SHA}@{APP_ENV}</code>
         </p>
 
         <div className={styles.grid}>

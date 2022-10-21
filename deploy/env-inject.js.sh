@@ -1,6 +1,7 @@
 # Environment JS template
 cat  << EOF
 window.envInject = {
+    APP_ENV: "${APP_ENV?}",
     APP_VERSION: "${APP_VERSION?}",
     APP_VERSION_SHA: "${APP_VERSION_SHA?}",
     APP_VERSION_BUILD: "${APP_VERSION_BUILD?}",

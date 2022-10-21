@@ -31,6 +31,7 @@ const getEnv = (key: string, $default = "") => {
   }
 };
 
+export const APP_ENV = getEnv("APP_ENV", "local");
 export const APP_VERSION = getEnv("APP_VERSION", "local");
 export const APP_VERSION_SHA = getEnv("APP_VERSION_SHA", "local");
 export const APP_VERSION_BUILD = getEnv("APP_VERSION_BUILD", "local");
