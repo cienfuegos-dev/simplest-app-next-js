@@ -70,8 +70,8 @@ COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
-# Add appropriate permissions to env-inject
 COPY --chown=nextjs:nodejs deploy/env-inject.js.sh deploy/start.sh ./deploy/
+# Add appropriate permissions to env-inject
 RUN chmod 500 /app/deploy/env-inject.js.sh /app/deploy/start.sh
 
 # Create folder where to put env-inject generated javascript
